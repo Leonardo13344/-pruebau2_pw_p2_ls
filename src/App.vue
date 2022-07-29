@@ -1,16 +1,40 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+ 
+ <MyGame :pokemons="pokemonsArray" />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+
+
+
+import MyGame from './components/MyGame.vue'
+import getPokemons from './helpers/obtenerDatosPokemon'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    MyGame
+},
+data(){
+  return{
+    pokemonsArray:[]
   }
+},
+methods:{
+  
+  async getArrayPokemons(){
+    this.pokemonsArray = await getPokemons()
+    console.log(this.pokemonsArray)
+
+  }
+},
+mounted(){
+  this.getArrayPokemons()
+},
+updates(){
+  this.getArrayPokemons()
+}
 }
 </script>
 
